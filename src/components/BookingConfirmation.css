@@ -1,0 +1,224 @@
+/* BookingConfirmation.css - Minimal Theme */
+
+.bc-page {
+  min-height: 100vh;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.bc-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Success Tick Icon */
+.bc-tick-container {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.tick {
+  width: 80px;
+  height: 80px;
+}
+
+.tick-circle {
+  stroke: #22c55e;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: tick-circle 1s ease-in-out forwards;
+}
+
+.tick-check {
+  stroke: #22c55e;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: tick-check 0.8s ease-in-out 0.6s forwards;
+}
+
+@keyframes tick-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tick-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Typography */
+.bc-title {
+  margin: 0 0 12px 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+}
+
+.bc-message {
+  margin: 0 0 24px 0;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Booking Details Table */
+.bc-table {
+  width: 100%;
+  margin-bottom: 32px;
+  border-collapse: collapse;
+}
+
+.bc-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+  font-size: 14px;
+}
+
+.bc-table td:first-child {
+  color: #666;
+  width: 40%;
+  padding-right: 16px;
+}
+
+.bc-table td:last-child {
+  color: #333;
+  font-weight: 500;
+}
+
+.bc-table tr:last-child td {
+  border-bottom: none;
+}
+
+.bc-total {
+  color: #22c55e;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Action Buttons */
+.bc-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bc-button {
+  padding: 12px 24px;
+  border: 1px solid #333;
+  background: #333;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.bc-button:hover {
+  background: #555;
+  border-color: #555;
+}
+
+.bc-download {
+  background: white;
+  color: #333;
+  border-color: #333;
+}
+
+.bc-download:hover {
+  background: #f5f5f5;
+}
+
+/* Error State */
+.bc-page h2 {
+  color: #333;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .bc-page {
+    padding: 16px;
+  }
+  
+  .bc-card {
+    padding: 24px;
+  }
+  
+  .bc-title {
+    font-size: 24px;
+  }
+  
+  .bc-message {
+    font-size: 15px;
+  }
+  
+  .tick {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .bc-table td {
+    padding: 10px 0;
+    font-size: 13px;
+  }
+  
+  .bc-table td:first-child {
+    padding-right: 12px;
+  }
+  
+  .bc-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .bc-button {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .bc-card {
+    padding: 20px;
+  }
+  
+  .bc-title {
+    font-size: 20px;
+  }
+  
+  .bc-message {
+    font-size: 14px;
+  }
+  
+  .bc-table td {
+    padding: 8px 0;
+    font-size: 12px;
+  }
+  
+  .bc-total {
+    font-size: 15px;
+  }
+}

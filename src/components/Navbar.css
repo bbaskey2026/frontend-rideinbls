@@ -1,0 +1,51 @@
+/* Navbar.css */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000000;
+  color: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 800;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #353333;
+}
+
+.user-greeting {
+  font-weight: 500;
+  color: black;
+  margin-right: 0.5rem;
+}
+
+.logout-button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 1px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #ccc;
+  color: #111;
+}

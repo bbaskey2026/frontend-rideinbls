@@ -1,0 +1,844 @@
+/* Landing Page CSS - White, Black, Yellow Theme with Medium-style Fonts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: #000;
+  background-color: #fff;
+  font-weight: 400;
+  letter-spacing: -0.003em;
+}
+
+.landing-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: none;
+  border-radius: 4px;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.register-link {
+  background: #FFD700;
+  color: #000;
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 0.75rem 1.5rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #e1a203;
+  padding: 0.5rem 1rem;
+  border-radius: 1px;
+  border: 1px solid #FFD700;
+}
+
+.user-menu span {
+  font-weight: 500;
+  color: #000;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.logout-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  height: 100vh;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  
+  padding: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mobile-nav-btn {
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  border-radius: 4px;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.mobile-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgb(255, 255, 255);
+  border-radius: 8px;
+  
+  margin-top: 1rem;
+}
+
+.mobile-logout-btn {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 1px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  padding: 120px 2rem 80px;
+  text-align: center;
+  border-bottom: 5px solid #FFD700;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFD700;
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1px;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #000;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  line-height: 1.58;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+}
+
+.stat strong {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.5rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.022em;
+}
+
+.stat span {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-bottom: 10rem;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 1px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  transition: none;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.hero-button.primary {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Background Slide Animation */
+.hero-button.primary::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #fff; /* Slide color */
+  opacity: 0.1;
+  transform: skewX(-20deg);
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.hero-button.primary:hover::before {
+  left: 200%;
+}
+
+/* Text above the pseudo-element */
+.hero-button.primary span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover effect for background & text */
+.hero-button.primary:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.hero-button.secondary {
+  background: #FFD700;
+  color: #000;
+   border-radius: 6px;
+  border-color: #FFD700;
+}
+
+.hero-button.disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+
+/* Section Styles */
+section {
+  padding: 80px 2rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1rem;
+  letter-spacing: -0.022em;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.58;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+/* Services Section */
+.services-section {
+  background: #f8f9fa;
+  border-top: 1px solid #FFD700;
+  border-bottom: 1px solid #FFD700;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 1px;
+  text-align: center;
+  border: 1px solid #021563;
+}
+
+.service-card svg {
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+.service-card p {
+  color: #666;
+  line-height: 1.58;
+  font-size: 1rem;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+/* Why Section */
+.why-section {
+  background: #fff;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-card {
+  background: #f8f9fa;
+  padding: 2.5rem;
+  border-radius: 1px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.why-card svg {
+  color: #0000ff;
+  margin-bottom: 1.5rem;
+}
+
+.why-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+.why-card p {
+  color: #666;
+  line-height: 1.58;
+  font-size: 1rem;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+/* Reviews Section */
+.reviews-section {
+  background: #f8f9fa;
+  border-top: 1px solid #FFD700;
+  border-bottom: 1px solid #FFD700;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.review-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1px;
+  border: 1px solid #858584;
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.star-filled {
+  color: #FFD700;
+  fill: #FFD700;
+}
+
+.star-empty {
+  color: #ddd;
+  fill: #ddd;
+}
+
+.review-card p {
+  color: #000000;
+  line-height: 1.58;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+.reviewer {
+  border-top: 2px solid #FFD700;
+  padding-top: 1rem;
+}
+
+.reviewer strong {
+  color: #000;
+  font-weight: 600;
+  display: block;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.reviewer span {
+  color: #666;
+  font-size: 0.9rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+/* Cities Section */
+.cities-section {
+  background: #fff;
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+}
+
+.city-card {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 1px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.city-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+.city-card p {
+  color: #666;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+.cities-note {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #666;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #000;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+/* Stats Section */
+.stats-section {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  border-top: 5px solid #FFD700;
+  border-bottom: 5px solid #FFD700;
+}
+
+.stats-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+  color: #fff;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.022em;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stat-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 15px;
+  text-align: center;
+  border: 3px solid #FFD700;
+}
+
+.stat-card h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.5rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.022em;
+}
+
+.stat-card p {
+  font-size: 1.1rem;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.stat-card small {
+  color: #666;
+  font-size: 0.9rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+/* Policies Section */
+.policies-section {
+  background: #f8f9fa;
+}
+
+.policies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.policy-card {
+  background: #efe8e8;
+  padding: 2.5rem;
+  border-radius: 1px;
+  border: 1px solid #000;
+}
+
+.policy-card svg {
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+
+.policy-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+.policy-card p {
+  color: #000000;
+  line-height: 1.58;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+/* Contact Section */
+.contact-section {
+  background: #fff;
+  border-top: 5px solid #FFD700;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1px;
+  text-align: center;
+  border: 1px solid #000000;
+}
+
+.contact-card svg {
+  color: #000;
+  margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.011em;
+}
+
+.contact-card p {
+  color: #666;
+  margin-bottom: 0.5rem;
+  line-height: 1.58;
+  font-family: 'source-serif-pro', Georgia, serif;
+  letter-spacing: -0.003em;
+}
+
+.contact-card strong {
+  color: #000;
+  font-weight: 600;
+  font-size: 1.1rem;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+.contact-card a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+  font-family: 'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  letter-spacing: -0.003em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-button {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+  }
+
+  .services-grid,
+  .why-grid,
+  .reviews-grid,
+  .policies-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cities-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  section {
+    padding: 60px 1rem;
+  }
+
+  .hero-section {
+    padding: 100px 1rem 60px;
+  }
+
+  .hero-stats {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat {
+    padding: 1rem;
+  }
+
+  .stat strong {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+
+  .service-card,
+  .why-card,
+  .review-card,
+  .policy-card,
+  .contact-card {
+    padding: 1.5rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}

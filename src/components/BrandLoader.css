@@ -1,0 +1,62 @@
+/* Overlay for fullscreen loader */
+.loader-wrap.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Loader box */
+.loader-box {
+  text-align: center;
+}
+
+/* Brand name animation */
+.brand span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.brand span.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Caption */
+.caption {
+  margin-top: 12px;
+  font-size: 14px;
+  color: inherit;
+  font-weight: 500;
+}
+
+/* Circular loader */
+.circle-loader {
+  margin: 20px auto 0;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.circle-loader .circle {
+  width: 100%;
+  height: 100%;
+  border: 6px solid #ccc;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Spin animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

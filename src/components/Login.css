@@ -1,0 +1,116 @@
+/* Login.css - Black & White Minimal Theme */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #0a0a0a; /* Dark background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem; /* mobile padding */
+  box-sizing: border-box;
+}
+
+.login-form {
+  background-color: #111; /* card black */
+  color: #fff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid #222;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.8);
+  width: 400px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9);
+}
+
+.login-title {
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.login-input {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background-color: #0f0f0f;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.login-input::placeholder {
+  color: #666;
+}
+
+.login-input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
+.login-button {
+  background-color: #fff;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #e5e5e5;
+}
+
+.login-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.logged-in-msg {
+  text-align: center;
+  font-weight: 600;
+  color: #bbb;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive for mobile devices */
+@media (max-width: 480px) {
+  .login-form {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 8px;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-input {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .login-button {
+    font-size: 0.95rem;
+    padding: 0.7rem;
+  }
+}
