@@ -1,7 +1,8 @@
 import React from "react";
-import { MapPin, Phone, Mail, Heart } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./Footer.css";
+
 const Footer = () => {
   const navigate = useNavigate();
 
@@ -15,55 +16,69 @@ const Footer = () => {
   };
 
   return (
-    <footer className="landing-footer">
-      <div className="footer-content">
-        {/* Brand Info */}
-        <div className="footer-section footer-brand">
-          <h3>Blsride</h3>
-          <p>
-            Odisha's leading vehicle booking platform. Safe, reliable, and affordable rides for everyone.
-          </p>
-          <div className="contact-info">
-            <p><MapPin size={16} />Balasore.Odisha</p>
-          <p> <Phone size={16} /> <a href="tel:+918249592464">+91 82495 92464</a></p>
-            <p><Mail size={16} /> <a href="mailto:Rideinbls@gmail.com?subject=Inquiry&body=Hello,%20I%20want%20to%20know%20more%20about%20Blsride.">Rideinbls@gmail.com</a>
-</p>
+    <footer className="ola-footer">
+      <div className="footer-container">
+        <div className="footer-grid">
+          {/* Brand Section */}
+          <div className="footer-brand">
+            <h2 className="brand-name">Blsride</h2>
+            <p className="brand-description">
+              Odisha's leading vehicle booking platform. Safe, reliable, and
+              affordable rides for everyone.
+            </p>
+            <div className="contact-info">
+              <div className="contact-item">
+                <MapPin size={18} />
+                <span>Balasore, Odisha</span>
+              </div>
+              <div className="contact-item">
+                <Phone size={18} />
+                <span>+91 82495 92464</span>
+              </div>
+              <div className="contact-item">
+                <Mail size={18} />
+                <span>Rideinbls@gmail.com</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div className="footer-column">
+            <h3 className="column-title">Quick Links</h3>
+            <ul className="footer-links">
+              <li onClick={() => handleScrollToSection("services")}>Services</li>
+              <li onClick={() => handleScrollToSection("cities")}>Cities</li>
+              <li onClick={() => handleScrollToSection("policies")}>Policies</li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div className="footer-column">
+            <h3 className="column-title">Support</h3>
+            <ul className="footer-links">
+              <li onClick={() => handleScrollToSection("contact")}>Contact Us</li>
+              <li onClick={() => handleNavigation("/help")}>Help Center</li>
+              <li onClick={() => handleNavigation("/safety")}>Safety</li>
+              <li onClick={() => handleNavigation("/feedback")}>Feedback</li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div className="footer-column">
+            <h3 className="column-title">Legal</h3>
+            <ul className="footer-links">
+              <li onClick={() => handleNavigation("/terms")}>Terms of Service</li>
+              <li onClick={() => handleNavigation("/privacy")}>Privacy Policy</li>
+              <li onClick={() => handleNavigation("/refund")}>Refund Policy</li>
+              <li onClick={() => handleNavigation("/driver-terms")}>Driver Terms</li>
+            </ul>
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div className="footer-section">
-          <h4>Quick Links</h4>
-          <button onClick={() => handleScrollToSection('services')} className="footer-link">Services</button>
-          <button onClick={() => handleScrollToSection('cities')} className="footer-link">Cities</button>
-          <button onClick={() => handleScrollToSection('policies')} className="footer-link">Policies</button>
-       
+        {/* Bottom Bar */}
+        <div className="footer-bottom">
+          <p className="copyright">© 2025 Blsride. All Rights Reserved.</p>
         </div>
-
-        {/* Support */}
-        <div className="footer-section">
-          <h4>Support</h4>
-          <button onClick={() => handleScrollToSection('contact')} className="footer-link">Contact Us</button>
-          <button onClick={() => handleNavigation('/help')} className="footer-link">Help Center</button>
-          <button onClick={() => handleNavigation('/safety')} className="footer-link">Safety</button>
-          <button onClick={() => handleNavigation('/feedback')} className="footer-link">Feedback</button>
-        </div>
-
-        {/* Legal */}
-        <div className="footer-section">
-          <h4>Legal</h4>
-          <button onClick={() => handleNavigation('/terms')} className="footer-link">Terms of Service</button>
-          <button onClick={() => handleNavigation('/privacy')} className="footer-link">Privacy Policy</button>
-          <button onClick={() => handleNavigation('/refund')} className="footer-link">Refund Policy</button>
-          <button onClick={() => handleNavigation('/driver-terms')} className="footer-link">Driver Terms</button>
-        </div>
-      </div>
-
-      {/* Footer Bottom */}
-      <div className="footer-bottom">
-        <p>
-          © 2025 Blsride. All Rights Reserved. 
-        </p>
       </div>
     </footer>
   );

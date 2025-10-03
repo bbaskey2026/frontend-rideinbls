@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import API_ENDPOINTS from "../config/api"; // ✅ centralized endpoints
+import API_ENDPOINTS from "../config/api";
 
 const AuthContext = createContext();
 
@@ -53,24 +53,46 @@ export const AuthProvider = ({ children }) => {
   };
 
   // ----- Registration -----
-  const register = async (name, email, password) => {
+  const register = async (name, email, mobile, password) => {
     try {
       const res = await fetch(API_ENDPOINTS.AUTH.REGISTER, {
         method: "POST",
         headers: getAuthHeaders(),
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, mobile, password }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        return { success: true, otp: data.otp };
+        return { success: true, otp: data.otp, message: data.message };
       } else {
-        return { success: false, message: data.error || "Registration failed" };
+        // Handle specific error cases
+        let errorMessage = "Registration failed";
+        
+        if (data.error) {
+          errorMessage = data.error;
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+        
+        // Common error messages
+        if (errorMessage.toLowerCase().includes("already exists") || 
+            errorMessage.toLowerCase().includes("already registered")) {
+          errorMessage = "User already exists with this email or mobile number";
+        } else if (errorMessage.toLowerCase().includes("invalid email")) {
+          errorMessage = "Please enter a valid email address";
+        } else if (errorMessage.toLowerCase().includes("invalid mobile") || 
+                   errorMessage.toLowerCase().includes("invalid phone")) {
+          errorMessage = "Please enter a valid mobile number";
+        } else if (errorMessage.toLowerCase().includes("password")) {
+          errorMessage = "Password must be at least 6 characters long";
+        }
+        
+        return { success: false, message: errorMessage };
       }
     } catch (err) {
-      console.error(err);
-      return { success: false, message: "Network error" };
+      console.error("Registration error:", err);
+      return { success: false, message: "Unable to connect to server. Please check your internet connection." };
     }
   };
 
@@ -90,44 +112,106 @@ export const AuthProvider = ({ children }) => {
           user: data.user,
           token: data.token,
         });
-        return { success: true, role: data.user.role || "user" };
+        return { success: true, role: data.user.role || "user", message: "Registration successful!" };
       } else {
-        return { success: false, message: data.error || "OTP verification failed" };
+        let errorMessage = "OTP verification failed";
+        
+        if (data.error) {
+          errorMessage = data.error;
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+        
+        // Common OTP error messages
+        if (errorMessage.toLowerCase().includes("expired")) {
+          errorMessage = "OTP has expired. Please request a new one.";
+        } else if (errorMessage.toLowerCase().includes("invalid")) {
+          errorMessage = "Invalid OTP. Please check and try again.";
+        } else if (errorMessage.toLowerCase().includes("already verified")) {
+          errorMessage = "Account already verified. Please login.";
+        }
+        
+        return { success: false, message: errorMessage };
       }
     } catch (err) {
-      console.error(err);
-      return { success: false, message: "Network error" };
+      console.error("OTP verification error:", err);
+      return { success: false, message: "Unable to verify OTP. Please try again." };
     }
   };
 
   // ----- Login -----
-  const login = async (email, password) => {
+  const login = async (identifier, password, loginMethod = "email") => {
     try {
+      const payload = { password };
+      
+      // Add email or mobile based on login method
+      if (loginMethod === "email") {
+        payload.email = identifier;
+      } else {
+        payload.mobile = identifier;
+      }
+
       const res = await fetch(API_ENDPOINTS.AUTH.LOGIN, {
         method: "POST",
         headers: getAuthHeaders(),
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        return { success: true, otp: data.otp };
+        return { success: true, otp: data.otp, message: data.message };
       } else {
-        return { success: false, message: data.error || "Login failed" };
+        let errorMessage = "Login failed";
+        
+        if (data.error) {
+          errorMessage = data.error;
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+        
+        // Common login error messages
+        if (errorMessage.toLowerCase().includes("not found") || 
+            errorMessage.toLowerCase().includes("does not exist") ||
+            errorMessage.toLowerCase().includes("not registered")) {
+          errorMessage = "User not found. Please register first.";
+        } else if (errorMessage.toLowerCase().includes("incorrect password") || 
+                   errorMessage.toLowerCase().includes("wrong password") ||
+                   errorMessage.toLowerCase().includes("invalid password")) {
+          errorMessage = "Incorrect password. Please try again.";
+        } else if (errorMessage.toLowerCase().includes("invalid credentials")) {
+          errorMessage = "Invalid email/mobile or password.";
+        } else if (errorMessage.toLowerCase().includes("not verified") || 
+                   errorMessage.toLowerCase().includes("verify your account")) {
+          errorMessage = "Please verify your account first.";
+        } else if (errorMessage.toLowerCase().includes("blocked") || 
+                   errorMessage.toLowerCase().includes("suspended")) {
+          errorMessage = "Your account has been suspended. Contact support.";
+        }
+        
+        return { success: false, message: errorMessage };
       }
     } catch (err) {
-      console.error(err);
-      return { success: false, message: "Network error" };
+      console.error("Login error:", err);
+      return { success: false, message: "Unable to connect to server. Please check your internet connection." };
     }
   };
 
-  const verifyLoginOtp = async (email, otp) => {
+  const verifyLoginOtp = async (identifier, otp, loginMethod = "email") => {
     try {
+      const payload = { otp };
+      
+      // Add email or mobile based on login method
+      if (loginMethod === "email") {
+        payload.email = identifier;
+      } else {
+        payload.mobile = identifier;
+      }
+
       const res = await fetch(API_ENDPOINTS.AUTH.LOGIN_VERIFY, {
         method: "POST",
         headers: getAuthHeaders(),
-        body: JSON.stringify({ email, otp }),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -138,13 +222,34 @@ export const AuthProvider = ({ children }) => {
           user: data.user,
           token: data.token,
         });
-        return { success: true, role: data.user.role || "user" };
+        return { success: true, role: data.user.role || "user", message: "Login successful!" };
       } else {
-        return { success: false, message: data.error || "OTP verification failed" };
+        let errorMessage = "OTP verification failed";
+        
+        if (data.error) {
+          errorMessage = data.error;
+        } else if (data.message) {
+          errorMessage = data.message;
+        }
+        
+        // Common OTP error messages
+        if (errorMessage.toLowerCase().includes("expired")) {
+          errorMessage = "OTP has expired. Please request a new one.";
+        } else if (errorMessage.toLowerCase().includes("invalid") || 
+                   errorMessage.toLowerCase().includes("incorrect")) {
+          errorMessage = "Invalid OTP. Please check and try again.";
+        } else if (errorMessage.toLowerCase().includes("maximum attempts") || 
+                   errorMessage.toLowerCase().includes("too many attempts")) {
+          errorMessage = "Too many failed attempts. Please try again later.";
+        } else if (errorMessage.toLowerCase().includes("not found")) {
+          errorMessage = "Session expired. Please login again.";
+        }
+        
+        return { success: false, message: errorMessage };
       }
     } catch (err) {
-      console.error(err);
-      return { success: false, message: "Network error" };
+      console.error("OTP verification error:", err);
+      return { success: false, message: "Unable to verify OTP. Please try again." };
     }
   };
 

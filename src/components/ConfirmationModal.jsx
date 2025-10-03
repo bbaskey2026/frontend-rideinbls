@@ -16,9 +16,7 @@ const ConfirmationModal = ({
     <div style={styles.modalOverlay}>
       <div style={styles.modalCard}>
         <div style={styles.modalHeader}>
-          <div style={styles.modalIcon}>
-            <LogOut size={24} />
-          </div>
+          
           <button style={styles.closeButton} onClick={onCancel}>
             <X size={20} />
           </button>
@@ -141,8 +139,8 @@ const styles = {
     fontSize: '0.9rem',
     fontWeight: 500,
     cursor: 'pointer',
-    border: '1px solid #dc2626',
-    background: '#dc2626',
+    border: '1px solid #909090ff',
+    background: '#000000ff',
     color: '#fff',
     transition: 'all 0.2s ease',
     fontFamily: "'sohne', 'Helvetica Neue', Helvetica, Arial, sans-serif",

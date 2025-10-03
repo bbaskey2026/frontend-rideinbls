@@ -30,7 +30,7 @@
 
 .user-greeting {
   font-weight: 500;
-  color: black;
+  color: rgb(255, 255, 255);
   margin-right: 0.5rem;
 }
 
@@ -48,4 +48,25 @@
 .logout-button:hover {
   background-color: #ccc;
   color: #111;
+}
+.nav-logo {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }

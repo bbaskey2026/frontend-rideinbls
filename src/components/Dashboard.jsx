@@ -27,7 +27,6 @@ function Dashboard() {
   const [totalPages, setTotalPages] = useState(1);
   const [filter, setFilter] = useState("all");
   const [vehicleIdInput, setVehicleIdInput] = useState("");
-  const [cancelMsg, setCancelMsg] = useState(null);
   const [manualCancelLoading, setManualCancelLoading] = useState(false);
 
   // Single modal state with action type
@@ -86,13 +85,6 @@ function Dashboard() {
     fetchBookings();
   }, [token, page]);
 
-  // Clear cancel message after 5 seconds
-  useEffect(() => {
-    if (!cancelMsg) return;
-    const timer = setTimeout(() => setCancelMsg(null), 5000);
-    return () => clearTimeout(timer);
-  }, [cancelMsg]);
-
   // ---------- Modal Actions ----------
   const handleModalConfirm = async () => {
     switch (modal.type) {
@@ -108,6 +100,10 @@ function Dashboard() {
       case "login":
         setModal({ ...modal, isOpen: false });
         navigate("/login");
+        break;
+
+      case "result":
+        setModal({ ...modal, isOpen: false });
         break;
 
       default:
@@ -152,7 +148,6 @@ function Dashboard() {
     if (!vehicleId) return;
 
     setManualCancelLoading(true);
-    setCancelMsg(null);
     setModal({ ...modal, isOpen: false });
 
     try {
@@ -169,15 +164,42 @@ function Dashboard() {
       const result = await res.json();
 
       if (res.ok && result.success) {
-        setCancelMsg("Booking cancelled successfully ✅");
         setVehicleIdInput("");
         await fetchBookings();
+        // Show success modal
+        setModal({
+          isOpen: true,
+          type: "result",
+          title: "Cancellation Successful",
+          message: "Your booking has been cancelled successfully. Refund will be processed according to our refund policy.",
+          confirmText: "OK",
+          cancelText: null,
+          data: null
+        });
       } else {
-        setCancelMsg(result.message || "Failed to cancel booking ❌");
+        // Show error modal
+        setModal({
+          isOpen: true,
+          type: "result",
+          title: "Cancellation Failed",
+          message: result.message || "Failed to cancel booking. Please try again or contact support.",
+          confirmText: "OK",
+          cancelText: null,
+          data: null
+        });
       }
     } catch (err) {
       console.error("Error cancelling booking:", err);
-      setCancelMsg("Error cancelling booking ❌");
+      // Show error modal
+      setModal({
+        isOpen: true,
+        type: "result",
+        title: "Error",
+        message: "An error occurred while cancelling your booking. Please try again later.",
+        confirmText: "OK",
+        cancelText: null,
+        data: null
+      });
     } finally {
       setManualCancelLoading(false);
     }
@@ -356,11 +378,6 @@ function Dashboard() {
               {manualCancelLoading ? "Cancelling..." : "Cancel Booking"}
             </button>
           </div>
-          {cancelMsg && (
-            <p className={`cancel-msg ${cancelMsg.includes("✅") ? "success" : "error"}`}>
-              {cancelMsg}
-            </p>
-          )}
         </section>
 
         {/* Bookings List */}
@@ -394,23 +411,60 @@ function Dashboard() {
 
                 <div className="vehicle-details">
                   <h3>{booking.vehicle?.name || "Vehicle Name N/A"}</h3>
-                  <p><strong>Brand:</strong> {booking.vehicle?.brand || "N/A"}</p>
-                  <p><strong>Type:</strong> {booking.vehicle?.type || "N/A"}</p>
-                  <p><strong>Seats:</strong> {booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</p>
-                  <p><strong>License Plate:</strong> {booking.vehicle?.licensePlate || "N/A"}</p>
-                  <p><strong>Total Price:</strong> ₹{booking.totalPrice || booking.amount || 0}</p>
-                  <p><strong>Route:</strong> {booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</p>
-                  <p><strong>Trip Dates:</strong> {formatDateRange(booking.startDate, booking.endDate)}</p>
-                  <p><strong>Trip Type:</strong> {booking.isRoundTrip ? "Round Trip" : "One Way"}</p>
-                  <p><strong>Booking Code:</strong> {booking.bookingCode || "N/A"}</p>
-                  <p><strong>Payment Status:</strong> {booking.paymentStatus || "N/A"}</p>
-                  <p><strong>Booking Status:</strong>{" "}
-                    {booking.bookingStatus === "Confirmed" ? (
-                      <span className="status-booked"><CheckCircle size={14} /> Active</span>
-                    ) : (
-                      <span className="status-available"><XCircle size={14} /> {booking.bookingStatus || "Cancelled"}</span>
-                    )}
-                  </p>
+                  
+                  {/* Table Layout using divs */}
+                  <div className="details-table">
+                    <div className="table-row">
+                      <div className="table-label">Brand:</div>
+                      <div className="table-value">{booking.vehicle?.brand || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Type:</div>
+                      <div className="table-value">{booking.vehicle?.type || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Seats:</div>
+                      <div className="table-value">{booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">License Plate:</div>
+                      <div className="table-value">{booking.vehicle?.licensePlate || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Total Price:</div>
+                      <div className="table-value">₹{booking.totalPrice || booking.amount || 0}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Route:</div>
+                      <div className="table-value">{booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Trip Dates:</div>
+                      <div className="table-value">{formatDateRange(booking.startDate, booking.endDate)}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Trip Type:</div>
+                      <div className="table-value">{booking.isRoundTrip ? "Round Trip" : "One Way"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Booking Code:</div>
+                      <div className="table-value">{booking.bookingCode || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Payment Status:</div>
+                      <div className="table-value">{booking.paymentStatus || "N/A"}</div>
+                    </div>
+                    <div className="table-row">
+                      <div className="table-label">Booking Status:</div>
+                      <div className="table-value">
+                        {booking.bookingStatus === "Confirmed" ? (
+                          <span className="status-booked"><CheckCircle size={14} /> Active</span>
+                        ) : (
+                          <span className="status-available"><XCircle size={14} /> {booking.bookingStatus || "Cancelled"}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
 
                   {canCancel(booking) && (
                     <button
@@ -430,9 +484,9 @@ function Dashboard() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination">
-            <button disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>⬅ Previous</button>
+            <button className="page-btn" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>⬅ Previous</button>
             <span>Page {page} of {totalPages}</span>
-            <button disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next ➡</button>
+            <button className="page-btn" disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next ➡</button>
           </div>
         )}
       </main>

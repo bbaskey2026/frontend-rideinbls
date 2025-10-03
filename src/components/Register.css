@@ -1,10 +1,11 @@
 /* ===========================
    Register Page Layout
 =========================== */
+
 .register-page {
   display: flex;
   min-height: 100vh;
-  background: #0a0a0a;
+  background: #ffffff;
   color: #fff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -15,8 +16,8 @@
 .register-left {
   flex: 1;
   background: linear-gradient(
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0.7)
+      rgb(255, 255, 255),
+      rgb(255, 255, 255)
     );
     /* add background */
   display: flex;
@@ -36,14 +37,7 @@
   filter: drop-shadow(0px 6px 16px rgba(0, 0, 0, 0.7));
 }
 
-.welcome-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  line-height: 1.3;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
+
 
 .welcome-text {
   font-size: 1rem;
@@ -60,18 +54,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #ffffff;
+   border-left:1px solid black;
   padding: 2rem;
 }
 
 /* Form Card */
 .login-form {
-  background: #000000;
+ 
   padding: 2.5rem 2rem;
   border-radius: 1px;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.9);
+
   display: flex;
  
   flex-direction: column;
@@ -87,7 +81,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   letter-spacing: 1px;
-  color: #fff;
+  color: #000000;
   position: relative;
 }
 
@@ -107,7 +101,7 @@
 .login-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  border-radius: 1px;
+  border-radius: 8px;
   border: 1px solid #333;
   background: #0f0f0f;
   color: #fff;
@@ -117,7 +111,7 @@
 }
 
 .login-input::placeholder {
-  color: #777;
+  color: #ffffff;
 }
 
 .login-input:focus {
@@ -129,10 +123,10 @@
 .login-button {
   width: 100%;
   padding: 0.9rem;
-  background: #fff;
-  color: #111;
+  background: #000000;
+  color: #ffffff;
   border: none;
-  border-radius: 1px;
+  border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -224,4 +218,19 @@
   text-decoration: underline;
 }
 /* Swap button between source & destination */
+
+.brand-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.brand-logo {
+  width: 200px; /* adjust as needed */
+  height: 200px; /* keep square for perfect circle */
+  border-radius: 50%; /* makes it circular */
+  object-fit: cover; /* ensures logo scales correctly */
+
+}
 

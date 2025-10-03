@@ -37,7 +37,7 @@ const AdminDashboard = () => {
   const [filters, setFilters] = useState({});
 
   // Mock API base URL - replace with your actual API URL
-  const API_BASE = 'http://localhost:5000/api/admin';
+  const BASE_URL = 'http://localhost:5000/api/admin';
 
   // Get auth token from localStorage or context
   const getAuthToken = () => {
@@ -64,7 +64,7 @@ const AdminDashboard = () => {
     }
 
     try {
-      const response = await fetch(`${API_BASE}${endpoint}`, config);
+      const response = await fetch(`${BASE_URL}${endpoint}`, config);
       const data = await response.json();
       
       if (!response.ok) {

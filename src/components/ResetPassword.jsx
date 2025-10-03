@@ -43,11 +43,9 @@ export default function ResetPassword() {
   return (
     <div className="register-page">
       <div className="register-left">
-        <img
-          src="/images/reset-password.png"
-          alt="Reset Password"
-          className="register-image"
-        />
+
+
+      
         <h1 className="welcome-title">Reset Your Password</h1>
         <p className="welcome-text">
           Enter the OTP sent to <strong>{email}</strong> and choose a new password.

@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 // Pages / Components
 import LandingPage from "./components/LandingPage";
 import Login from "./components/Login";
@@ -18,21 +17,23 @@ import ResetPassword from "./components/ResetPassword";
 import BookingConfirmation from "./components/BookingConfirmation";
 import BookingPage from "./components/BookingPage";
 import AdminPayments from "./components/AdminPayments";
-import UserList from "./components/UserList";
 import VehicleList from "./components/VehicleList";
 import UserBookings from "./components/UserBookings";
-
+import UserProfile from "./components/UserProfile";
+import DriverManagement from "./components/DriverManagement";
+import PaymentPage from "./components/PaymentPage";
+import NotFound from "./components/NotFound";
 function App() {
   return (
     <AuthProvider>
       <Router>
         {/* Global Navbar */}
-        <Navbar />
+   <Navbar></Navbar>
         <ToastContainer position="top-center" autoClose={3000} />
 
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={< LandingPage/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -41,7 +42,9 @@ function App() {
           <Route path="/finding-vehicles" element={<VehiclesPage />} />
           <Route path="/find-route" element={<BookingPage />} />
           <Route path="/booking-confirmation" element={<BookingConfirmation />} />
-
+           <Route path="/payment" element={<PaymentPage />} />
+           <Route path="*" element={<NotFound />} />
+ <Route path="/profile" element={< UserProfile/>} />
           {/* Private User Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
 
@@ -58,7 +61,7 @@ function App() {
             path="/admin/users"
             element={
               <PrivateRoute adminOnly={true}>
-                <UserList />
+                <UserBookings />
               </PrivateRoute>
             }
           />
@@ -86,7 +89,21 @@ function App() {
               </PrivateRoute>
             }
           />
+
+
+          <Route
+            path="/driver-signup"
+            element={
+              <PrivateRoute adminOnly={true}>
+                <DriverManagement />
+              </PrivateRoute>
+            }
+          />
         </Routes>
+
+
+
+
 
         <Footer />
       </Router>

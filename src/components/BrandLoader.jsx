@@ -5,7 +5,7 @@ export default function BrandLoader({
   name = "RideInBls",
   caption = "Loading, please wait...",
   overlay = true,
-  textColor = "#000",
+  textColor = "#ffffffff",
   size = "clamp(36px, 6vw, 64px)"
 }) {
   const letters = name.split("");

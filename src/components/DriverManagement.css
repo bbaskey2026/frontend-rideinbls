@@ -1,0 +1,126 @@
+/* DriverManagement.css - Black & White Bold Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+.driver-management-container {
+  min-height: 100vh;
+  background: #000000;
+  padding: 40px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Header */
+.driver-header {
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.driver-title {
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.driver-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: #cccccc;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.add-driver-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: #ffffff;
+  color: #000000;
+  border: 4px solid #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: inherit;
+  box-shadow: 0 6px 0 rgba(255, 255, 255, 0.3);
+}
+
+.add-driver-btn:hover {
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 rgba(255, 255, 255, 0.3);
+}
+
+.add-driver-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Form Card */
+.driver-form-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 0;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form Header */
+.form-header {
+  background: #000000;
+  color: #ffffff;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid #ffffff;
+}
+
+.form-header h2 {
+  font-size: 28px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.close-btn {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}

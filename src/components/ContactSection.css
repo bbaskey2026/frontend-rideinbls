@@ -1,0 +1,116 @@
+.contact-section {
+  padding: 80px 20px;
+  background-color: #fff;
+  font-family: 'Rubik', sans-serif;
+  color: #000;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 12px;
+}
+
+.section-header p {
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Grid Layout */
+.contact-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Cards */
+.contact-card {
+  flex: 1;
+  min-width: 280px;
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+/* Icons */
+.contact-icon {
+  color: #000;
+  margin-bottom: 20px;
+}
+
+/* Headings */
+.contact-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+/* Paragraphs */
+.contact-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 6px;
+  color: #222;
+}
+
+/* Email Link */
+.email-link {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+
+.email-link:hover {
+  color: #555;
+}
+
+/* Optional CTA Button */
+.contact-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #222;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-card {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+  }
+}

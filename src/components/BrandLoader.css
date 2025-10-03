@@ -1,62 +1,170 @@
-/* Overlay for fullscreen loader */
+/* BrandLoader.css - Modern Loader Design */
+
+.loader-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 40px 20px;
+  color: #ffffff;
+}
+
 .loader-wrap.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: rgba(255, 255, 255, 0.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  backdrop-filter: blur(8px);
   z-index: 9999;
 }
 
-/* Loader box */
 .loader-box {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 
-/* Brand name animation */
+/* Brand Name Animation */
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  gap: 2px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
 .brand span {
-  display: inline-block;
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
+  transform: translateY(-20px) scale(0.8);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .brand span.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 /* Caption */
 .caption {
-  margin-top: 12px;
-  font-size: 14px;
-  color: inherit;
+  font-size: 15px;
   font-weight: 500;
+  opacity: 0;
+  animation: fadeInCaption 0.6s ease-out 0.5s forwards;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.01em;
 }
 
-/* Circular loader */
+@keyframes fadeInCaption {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+}
+
+/* Circular Spinner */
 .circle-loader {
-  margin: 20px auto 0;
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   position: relative;
 }
 
-.circle-loader .circle {
+.circle {
   width: 100%;
   height: 100%;
-  border: 6px solid #ccc;
-  border-top-color: #000;
+  border: 3px solid transparent;
+  border-top-color: currentColor;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  opacity: 0;
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
 }
 
-/* Spin animation */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+
+/* Pulse effect */
+.circle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loader-wrap {
+    padding: 30px 16px;
+  }
+
+  .loader-box {
+    gap: 20px;
+  }
+
+  .caption {
+    font-size: 14px;
+  }
+
+  .circle-loader {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-wrap {
+    padding: 24px 12px;
+  }
+
+  .loader-box {
+    gap: 16px;
+  }
+
+  .caption {
+    font-size: 13px;
+  }
+
+  .circle-loader {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .loader-wrap.overlay {
+    background: rgba(0, 0, 0, 0.95);
+  }
 }

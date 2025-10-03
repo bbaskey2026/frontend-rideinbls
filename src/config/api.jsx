@@ -3,7 +3,14 @@ const BASE_URL = "http://localhost:5000/api";
 
 // API endpoints configuration
 const API_ENDPOINTS = {
+
+
+
+  IMAGES: {
+    FETCH: `${BASE_URL}/api/images`, // ✅ This must exist
+  },
   AUTH: {
+     ME: `${BASE_URL}/auth/me`,
     REGISTER: `${BASE_URL}/auth/register`,
     REGISTER_VERIFY: `${BASE_URL}/auth/register/verify`,
     LOGIN: `${BASE_URL}/auth/login`,

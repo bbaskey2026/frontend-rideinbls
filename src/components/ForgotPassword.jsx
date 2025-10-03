@@ -35,16 +35,16 @@ export default function ForgotPassword() {
     <div className="register-page">
       {/* Left Side */}
       <div className="register-left">
-        <img
-          src="/images/forgot-password.png"
-          alt="Forgot Password"
-          className="register-image"
-        />
-        <h1 className="welcome-title">Forgot Your Password?</h1>
-        <p className="welcome-text">
-          Enter your registered email, and we will send you a One-Time Password (OTP) 
-          to reset your password securely.
-        </p>
+        <h1 className="welcome-title">Welcome Back to RideInBls.com</h1>
+  {/* Replace welcome title & text with brand logo */}
+  <div className="brand-logo-container">
+    
+    <img
+      src="./src/assets/bhu.jpg"  // <-- your logo path
+      alt="RideInBls Logo"
+      className="brand-logo"
+    />
+  </div>
       </div>
 
       {/* Right Side */}
