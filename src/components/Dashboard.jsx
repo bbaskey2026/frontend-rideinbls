@@ -10,6 +10,8 @@ import {
   Info,
   AlertTriangle,
   RefreshCcw,
+  Copy,
+  Check,
 } from "lucide-react";
 import BrandLoader from "./BrandLoader";
 import ConfirmationModal from "./ConfirmationModal";
@@ -28,6 +30,7 @@ function Dashboard() {
   const [filter, setFilter] = useState("all");
   const [vehicleIdInput, setVehicleIdInput] = useState("");
   const [manualCancelLoading, setManualCancelLoading] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(null);
 
   // Single modal state with action type
   const [modal, setModal] = useState({
@@ -84,6 +87,18 @@ function Dashboard() {
   useEffect(() => {
     fetchBookings();
   }, [token, page]);
+
+  // ---------- Copy Booking Code ----------
+  const copyBookingCode = (code) => {
+    if (!code) return;
+    
+    navigator.clipboard.writeText(code).then(() => {
+      setCopiedCode(code);
+      setTimeout(() => setCopiedCode(null), 2000);
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
+  };
 
   // ---------- Modal Actions ----------
   const handleModalConfirm = async () => {
@@ -166,7 +181,6 @@ function Dashboard() {
       if (res.ok && result.success) {
         setVehicleIdInput("");
         await fetchBookings();
-        // Show success modal
         setModal({
           isOpen: true,
           type: "result",
@@ -177,7 +191,6 @@ function Dashboard() {
           data: null
         });
       } else {
-        // Show error modal
         setModal({
           isOpen: true,
           type: "result",
@@ -190,7 +203,6 @@ function Dashboard() {
       }
     } catch (err) {
       console.error("Error cancelling booking:", err);
-      // Show error modal
       setModal({
         isOpen: true,
         type: "result",
@@ -225,7 +237,6 @@ function Dashboard() {
     return `${start} → ${formatDate(endDate)}`;
   };
 
-  // Show loading while auth is initializing
   if (authLoading) {
     return (
       <div className="dashboard-layout">
@@ -234,7 +245,6 @@ function Dashboard() {
     );
   }
 
-  // Show modal only if user is not logged in after auth finished loading
   if (!user) {
     return (
       <>
@@ -251,7 +261,6 @@ function Dashboard() {
     );
   }
 
-  // ---------- Filtering ----------
   const filteredBookings = bookings.filter((b) => {
     if (filter === "active")
       return b.bookingStatus === "Confirmed" && b.paymentStatus === "Paid";
@@ -260,7 +269,6 @@ function Dashboard() {
     return true;
   });
 
-  // ---------- Helper: Can Cancel ----------
   const canCancel = (booking) =>
     booking.paymentStatus === "Paid" &&
     booking.bookingStatus === "Confirmed" &&
@@ -269,7 +277,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar */}
       <aside className="dashboard-sidebar">
         <h2 className="sidebar-title">Dashboard</h2>
         <ul className="sidebar-menu">
@@ -282,7 +289,6 @@ function Dashboard() {
         </ul>
       </aside>
 
-      {/* Single Conditional Modal */}
       <ConfirmationModal
         isOpen={modal.isOpen}
         onConfirm={handleModalConfirm}
@@ -293,7 +299,6 @@ function Dashboard() {
         cancelText={modal.cancelText}
       />
 
-      {/* Main Content */}
       <main className="dashboard-main">
         <header className="dashboard-header">
           <h2 className="dashboard-title">My Booked Vehicles</h2>
@@ -304,7 +309,6 @@ function Dashboard() {
             Email: <strong>{user.email}</strong>
           </p>
 
-          {/* Filters */}
           <div className="filter-group">
             <button
               className={`filter-btn ${filter === "all" ? "active" : ""}`}
@@ -332,7 +336,6 @@ function Dashboard() {
           </div>
         </header>
 
-        {/* Refund Policies */}
         <section className="refund-policies">
           <h3>
             <Info size={16} style={{ marginRight: 8, display: "inline" }} />
@@ -358,7 +361,6 @@ function Dashboard() {
           </ul>
         </section>
 
-        {/* Manual Cancel */}
         <section className="manual-cancel">
           <h3>Cancel Booking by Vehicle ID</h3>
           <div className="manual-cancel-box">
@@ -380,7 +382,6 @@ function Dashboard() {
           </div>
         </section>
 
-        {/* Bookings List */}
         {loading ? (
           <BrandLoader name="RideInBls" caption="Loading, please wait..." overlay textColor="#111" size="60px" />
         ) : filteredBookings.length === 0 ? (
@@ -389,89 +390,88 @@ function Dashboard() {
             <p>{filter === "all" ? "You don't have any bookings yet." : `No ${filter} bookings found.`}</p>
           </div>
         ) : (
-          <div className="vehicle-grid">
+          <div className="compact-vehicle-grid">
             {filteredBookings.map((booking) => (
-              <div key={booking._id} className="vehicle-card">
-                {booking.vehicle?.images?.[0] ? (
-                  <img
-                    src={booking.vehicle.images[0]}
-                    alt={booking.vehicle.name || "Vehicle"}
-                    className="vehicle-image"
-                    onError={(e) => (e.target.style.display = "none")}
-                  />
-                ) : (
-                  <div className="image-fallback">
-                    <Car size={60} color="#0036fbff" />
-                  </div>
-                )}
-
-                {booking.bookingStatus === "Confirmed" && (
-                  <div className="booked-badge"><XCircle size={16} /> Active Booking</div>
-                )}
-
-                <div className="vehicle-details">
-                  <h3>{booking.vehicle?.name || "Vehicle Name N/A"}</h3>
+              <div key={booking._id} className="compact-vehicle-card">
+                <div className="compact-card-header">
+                  {booking.vehicle?.images?.[0] ? (
+                    <img
+                      src={booking.vehicle.images[0]}
+                      alt={booking.vehicle.name || "Vehicle"}
+                      className="compact-vehicle-image"
+                      onError={(e) => (e.target.style.display = "none")}
+                    />
+                  ) : (
+                    <div className="compact-image-fallback">
+                      <Car size={40} color="#0036fbff" />
+                    </div>
+                  )}
                   
-                  {/* Table Layout using divs */}
-                  <div className="details-table">
-                    <div className="table-row">
-                      <div className="table-label">Brand:</div>
-                      <div className="table-value">{booking.vehicle?.brand || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Type:</div>
-                      <div className="table-value">{booking.vehicle?.type || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Seats:</div>
-                      <div className="table-value">{booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">License Plate:</div>
-                      <div className="table-value">{booking.vehicle?.licensePlate || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Total Price:</div>
-                      <div className="table-value">₹{booking.totalPrice || booking.amount || 0}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Route:</div>
-                      <div className="table-value">{booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Trip Dates:</div>
-                      <div className="table-value">{formatDateRange(booking.startDate, booking.endDate)}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Trip Type:</div>
-                      <div className="table-value">{booking.isRoundTrip ? "Round Trip" : "One Way"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Booking Code:</div>
-                      <div className="table-value">{booking.bookingCode || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Payment Status:</div>
-                      <div className="table-value">{booking.paymentStatus || "N/A"}</div>
-                    </div>
-                    <div className="table-row">
-                      <div className="table-label">Booking Status:</div>
-                      <div className="table-value">
-                        {booking.bookingStatus === "Confirmed" ? (
-                          <span className="status-booked"><CheckCircle size={14} /> Active</span>
+                  <div className="compact-header-info">
+                    <h3 className="compact-vehicle-name">{booking.vehicle?.name || "Vehicle N/A"}</h3>
+                    <div className="compact-booking-code">
+                      <span>{booking.bookingCode || "N/A"}</span>
+                      <button
+                        className="copy-code-btn"
+                        onClick={() => copyBookingCode(booking.bookingCode)}
+                        title="Copy booking code"
+                      >
+                        {copiedCode === booking.bookingCode ? (
+                          <Check size={14} color="#22c55e" />
                         ) : (
-                          <span className="status-available"><XCircle size={14} /> {booking.bookingStatus || "Cancelled"}</span>
+                          <Copy size={14} />
                         )}
-                      </div>
+                      </button>
                     </div>
+                  </div>
+
+                  {booking.bookingStatus === "Confirmed" && (
+                    <div className="compact-status-badge active">Active</div>
+                  )}
+                  {booking.bookingStatus === "Cancelled" && (
+                    <div className="compact-status-badge cancelled">Cancelled</div>
+                  )}
+                  {booking.bookingStatus === "Completed" && (
+                    <div className="compact-status-badge completed">Completed</div>
+                  )}
+                </div>
+
+                <div className="compact-vehicle-details">
+                  <div className="compact-info-grid">
+                    <div className="compact-info-item">
+                      <span className="compact-label">Brand</span>
+                      <span className="compact-value">{booking.vehicle?.brand || "N/A"}</span>
+                    </div>
+                    <div className="compact-info-item">
+                      <span className="compact-label">Type</span>
+                      <span className="compact-value">{booking.vehicle?.type || "N/A"}</span>
+                    </div>
+                    <div className="compact-info-item">
+                      <span className="compact-label">Seats</span>
+                      <span className="compact-value">{booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</span>
+                    </div>
+                    <div className="compact-info-item">
+                      <span className="compact-label">Price</span>
+                      <span className="compact-value price">₹{booking.totalPrice || booking.amount || 0}</span>
+                    </div>
+                  </div>
+
+                  <div className="compact-route">
+                    <span className="route-text">{booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</span>
+                  </div>
+
+                  <div className="compact-dates">
+                    <span className="dates-text">{formatDateRange(booking.startDate, booking.endDate)}</span>
+                    <span className="trip-type">{booking.isRoundTrip ? "Round Trip" : "One Way"}</span>
                   </div>
 
                   {canCancel(booking) && (
                     <button
-                      className="cancel-button"
+                      className="compact-cancel-button"
                       onClick={() => showCancelModal(booking.bookingCode)}
                       disabled={manualCancelLoading}
                     >
+                      <XCircle size={16} />
                       {manualCancelLoading ? "Cancelling..." : "Cancel Booking"}
                     </button>
                   )}
@@ -481,7 +481,6 @@ function Dashboard() {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination">
             <button className="page-btn" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>⬅ Previous</button>
