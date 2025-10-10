@@ -1,7 +1,5 @@
 import React from "react";
 import {
-
-
     Calendar ,
   MapPin, Car, Users, Shield, Globe, Star, FileText,
   Clock, Phone, CreditCard, Award, Zap, Heart,
@@ -17,6 +15,14 @@ import Cities from "./Cities";
 import Policies from "./Policies";
 import Partner from "./Partner";
 import ContactSection from "./ContactSection";
+import BookingPage from "./BookingPage";
+
+// Import all images
+import heroImage from "../assets/hero.png";
+import locationImage from "../assets/location1.png";
+import timeImage from "../assets/time-date.png";
+import vehicleImage from "../assets/pickavehicle.png";
+import confirmImage from "../assets/confirm.png";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -68,7 +74,6 @@ navigate("/admin/userbookings")
   const renderGuestNavigation = () => (
     <div className="nav-links">
       <button onClick={() => handleScrollToSection("services")} className="nav-link-btn">Services</button>
-      <button onClick={() => handleScrollToSection("why-us")} className="nav-link-btn">Why Us</button>
       <button onClick={() => handleScrollToSection("cities")} className="nav-link-btn">Cities</button>
       <button onClick={() => handleScrollToSection("reviews")} className="nav-link-btn">Reviews</button>
       <button onClick={() => handleScrollToSection("policies")} className="nav-link-btn">Policies</button>
@@ -108,7 +113,6 @@ navigate("/admin/userbookings")
   const renderGuestMobileMenu = () => (
     <div className="mobile-menu">
       <button onClick={() => handleScrollToSection("services")} className="mobile-nav-btn">Services</button>
-      <button onClick={() => handleScrollToSection("why-us")} className="mobile-nav-btn">Why Us</button>
       <button onClick={() => handleScrollToSection("cities")} className="mobile-nav-btn">Cities</button>
       <button onClick={() => handleScrollToSection("reviews")} className="mobile-nav-btn">Reviews</button>
       <button onClick={() => handleScrollToSection("policies")} className="mobile-nav-btn">Policies</button>
@@ -123,7 +127,7 @@ navigate("/admin/userbookings")
       <button onClick={() => handleNavigation("/dashboard")} className="mobile-nav-btn">Dashboard</button>
       <button onClick={() => handleNavigation("/profile")} className="mobile-nav-btn">Profile</button>
       <div className="mobile-user-info">
-        <span>Hello, {user?.name || "User"}</span>
+        <span>Hello,{user?.name || "User"}</span>
         <button onClick={() => { handleLogout(); setMobileMenuOpen(false); }} className="mobile-logout-btn">
           Logout
         </button>
@@ -158,62 +162,20 @@ navigate("/admin/userbookings")
 
 
 
-   
+    <BookingPage></BookingPage>
+     
   {/* Left Side - Vehicle Image */}
   <div className="hero-image">
+    <p className="title">Go anywhere with RideInBls</p>
     <img
-      src="./src/assets/hero.png" // <-- replace with your actual image path
+      src={heroImage}
       alt="Vehicles Fleet"
     />
   </div>
 
   {/* Right Side - Text + Buttons */}
-  <div className="hero-content">
-   
-
-    <h1>
-      Premium Vehicle Booking Platform for Modern Transportation
-    </h1>
-
-    <p>
-      Experience seamless, technology-driven mobility solutions with our
-      comprehensive fleet management system. Book from 10,000+ professionally
-      maintained and GPS-tracked vehicles across 50+ cities with enterprise-grade
-      security and 24/7 operational support.
-    </p>
-
-    <div className="hero-buttons">
-      <button
-        onClick={() =>
-          handleNavigation(
-            user && token && user.role !== "admin"
-              ? `/find-route?user=${encodeURIComponent(user.name)}`
-              : "/login"
-          )
-        }
-        disabled={user?.role === "admin"}
-        className={`hero-button primary ${user?.role === "admin" ? "disabled" : ""}`}
-      >
-        {user && token
-          ? user.role === "admin"
-            ? "Administrative Account - Booking Restricted"
-            : "Book Now"
-          : "Login Find Vehicles"}{" "}
-        <ArrowRight size={18} />
-      </button>
-
-      <button
-        onClick={() =>
-          handleNavigation(user?.role === "admin" ? "/admin/dashboard" : "/vehicles")
-        }
-        className="hero-button secondary"
-      >
-        {user?.role === "admin"
-          ? "System Administration Panel"
-          : "Browse Fleet Catalog"}
-      </button>
-    </div>
-  </div>
+ 
+  
 </section>
 
 
@@ -240,7 +202,7 @@ navigate("/admin/userbookings")
       </p>
     </div>
     <div className="step-image">
-      <img src="./src/assets/Select your pickup and drop-off points.png" alt="Choose Location" />
+      <img src={locationImage} alt="Choose Location" />
     </div>
   </div>
 
@@ -258,7 +220,7 @@ navigate("/admin/userbookings")
       </p>
     </div>
     <div className="step-image">
-      <img src="./src/assets/time-date.png" alt="Select Date & Time" />
+      <img src={timeImage} alt="Select Date & Time" />
     </div>
   </div>
 
@@ -276,7 +238,7 @@ navigate("/admin/userbookings")
       </p>
     </div>
     <div className="step-image">
-      <img src="./src/assets/pickavehicle.png" alt="Pick Vehicle" />
+      <img src={vehicleImage} alt="Pick Vehicle" />
     </div>
   </div>
 
@@ -294,7 +256,7 @@ navigate("/admin/userbookings")
       </p>
     </div>
     <div className="step-image">
-      <img src="./src/assets/confirm.png" alt="Confirm & Go" />
+      <img src={confirmImage} alt="Confirm & Go" />
     </div>
   </div>
 </section>

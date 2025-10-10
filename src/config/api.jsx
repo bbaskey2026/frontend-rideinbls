@@ -1,5 +1,5 @@
 // Base URL for all API requests
-const BASE_URL = "https://backend-rideinbls.onrender.com";
+const BASE_URL = "http://localhost:5000/api";
 
 // API endpoints configuration
 const API_ENDPOINTS = {

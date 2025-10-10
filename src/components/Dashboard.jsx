@@ -239,7 +239,7 @@ function Dashboard() {
 
   if (authLoading) {
     return (
-      <div className="dashboard-layout">
+      <div className="db-layout">
         <BrandLoader name="RideInBls" caption="Loading..." overlay textColor="#111" size="60px" />
       </div>
     );
@@ -276,14 +276,14 @@ function Dashboard() {
     new Date(booking.startDate) > new Date();
 
   return (
-    <div className="dashboard-layout">
-      <aside className="dashboard-sidebar">
-        <h2 className="sidebar-title">Dashboard</h2>
-        <ul className="sidebar-menu">
-          <li className="sidebar-item active">
+    <div className="db-layout">
+      <aside className="db-sidebar">
+        <h2 className="db-sidebar-title">Dashboard</h2>
+        <ul className="db-sidebar-menu">
+          <li className="db-sidebar-item db-sidebar-item--active">
             <ListChecks size={18} /> My Bookings
           </li>
-          <li className="sidebar-item logout" onClick={showLogoutModal}>
+          <li className="db-sidebar-item db-sidebar-item--logout" onClick={showLogoutModal}>
             <LogOut size={18} /> Logout
           </li>
         </ul>
@@ -299,32 +299,32 @@ function Dashboard() {
         cancelText={modal.cancelText}
       />
 
-      <main className="dashboard-main">
-        <header className="dashboard-header">
-          <h2 className="dashboard-title">My Booked Vehicles</h2>
-          <p className="dashboard-welcome">
+      <main className="db-main">
+        <header className="db-header">
+          <h2 className="db-title">My Booked Vehicles</h2>
+          <p className="db-welcome">
             Welcome, <strong>{user.username || user.name || user.email}</strong>
           </p>
-          <p className="dashboard-welcome">
+          <p className="db-welcome">
             Email: <strong>{user.email}</strong>
           </p>
 
-          <div className="filter-group">
+          <div className="db-filter-group">
             <button
-              className={`filter-btn ${filter === "all" ? "active" : ""}`}
+              className={`db-filter-btn ${filter === "all" ? "db-filter-btn--active" : ""}`}
               onClick={() => setFilter("all")}
             >
               <Filter size={14} /> All ({bookings.length})
             </button>
             <button
-              className={`filter-btn ${filter === "active" ? "active" : ""}`}
+              className={`db-filter-btn ${filter === "active" ? "db-filter-btn--active" : ""}`}
               onClick={() => setFilter("active")}
             >
               <CheckCircle size={14} /> Active (
               {bookings.filter((b) => b.bookingStatus === "Confirmed").length})
             </button>
             <button
-              className={`filter-btn ${filter === "completed" ? "active" : ""}`}
+              className={`db-filter-btn ${filter === "completed" ? "db-filter-btn--active" : ""}`}
               onClick={() => setFilter("completed")}
             >
               <XCircle size={14} /> Completed (
@@ -336,7 +336,7 @@ function Dashboard() {
           </div>
         </header>
 
-        <section className="refund-policies">
+        <section className="db-refund-policies">
           <h3>
             <Info size={16} style={{ marginRight: 8, display: "inline" }} />
             Refund Policies
@@ -361,9 +361,9 @@ function Dashboard() {
           </ul>
         </section>
 
-        <section className="manual-cancel">
+        <section className="db-manual-cancel">
           <h3>Cancel Booking by Vehicle ID</h3>
-          <div className="manual-cancel-box">
+          <div className="db-manual-cancel-box">
             <input
               type="text"
               placeholder="Enter Booking Code (e.g., BLS-ABC123)"
@@ -385,34 +385,34 @@ function Dashboard() {
         {loading ? (
           <BrandLoader name="RideInBls" caption="Loading, please wait..." overlay textColor="#111" size="60px" />
         ) : filteredBookings.length === 0 ? (
-          <div className="empty-state">
-            <Car size={64} className="empty-icon" />
+          <div className="db-empty-state">
+            <Car size={64} className="db-empty-icon" />
             <p>{filter === "all" ? "You don't have any bookings yet." : `No ${filter} bookings found.`}</p>
           </div>
         ) : (
-          <div className="compact-vehicle-grid">
+          <div className="db-booking-grid">
             {filteredBookings.map((booking) => (
-              <div key={booking._id} className="compact-vehicle-card">
-                <div className="compact-card-header">
+              <div key={booking._id} className="db-booking-card">
+                <div className="db-card-header">
                   {booking.vehicle?.images?.[0] ? (
                     <img
                       src={booking.vehicle.images[0]}
                       alt={booking.vehicle.name || "Vehicle"}
-                      className="compact-vehicle-image"
+                      className="db-vehicle-image"
                       onError={(e) => (e.target.style.display = "none")}
                     />
                   ) : (
-                    <div className="compact-image-fallback">
+                    <div className="db-image-fallback">
                       <Car size={40} color="#0036fbff" />
                     </div>
                   )}
                   
-                  <div className="compact-header-info">
-                    <h3 className="compact-vehicle-name">{booking.vehicle?.name || "Vehicle N/A"}</h3>
-                    <div className="compact-booking-code">
+                  <div className="db-header-info">
+                    <h3 className="db-vehicle-name">{booking.vehicle?.name || "Vehicle N/A"}</h3>
+                    <div className="db-booking-code">
                       <span>{booking.bookingCode || "N/A"}</span>
                       <button
-                        className="copy-code-btn"
+                        className="db-copy-btn"
                         onClick={() => copyBookingCode(booking.bookingCode)}
                         title="Copy booking code"
                       >
@@ -426,48 +426,48 @@ function Dashboard() {
                   </div>
 
                   {booking.bookingStatus === "Confirmed" && (
-                    <div className="compact-status-badge active">Active</div>
+                    <div className="db-status-badge db-status-badge--active">Active</div>
                   )}
                   {booking.bookingStatus === "Cancelled" && (
-                    <div className="compact-status-badge cancelled">Cancelled</div>
+                    <div className="db-status-badge db-status-badge--cancelled">Cancelled</div>
                   )}
                   {booking.bookingStatus === "Completed" && (
-                    <div className="compact-status-badge completed">Completed</div>
+                    <div className="db-status-badge db-status-badge--completed">Completed</div>
                   )}
                 </div>
 
-                <div className="compact-vehicle-details">
-                  <div className="compact-info-grid">
-                    <div className="compact-info-item">
-                      <span className="compact-label">Brand</span>
-                      <span className="compact-value">{booking.vehicle?.brand || "N/A"}</span>
+                <div className="db-card-details">
+                  <div className="db-info-grid">
+                    <div className="db-info-item">
+                      <span className="db-info-label">Brand</span>
+                      <span className="db-info-value">{booking.vehicle?.brand || "N/A"}</span>
                     </div>
-                    <div className="compact-info-item">
-                      <span className="compact-label">Type</span>
-                      <span className="compact-value">{booking.vehicle?.type || "N/A"}</span>
+                    <div className="db-info-item">
+                      <span className="db-info-label">Type</span>
+                      <span className="db-info-value">{booking.vehicle?.type || "N/A"}</span>
                     </div>
-                    <div className="compact-info-item">
-                      <span className="compact-label">Seats</span>
-                      <span className="compact-value">{booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</span>
+                    <div className="db-info-item">
+                      <span className="db-info-label">Seats</span>
+                      <span className="db-info-value">{booking.vehicle?.capacity || booking.vehicle?.seats || "N/A"}</span>
                     </div>
-                    <div className="compact-info-item">
-                      <span className="compact-label">Price</span>
-                      <span className="compact-value price">₹{booking.totalPrice || booking.amount || 0}</span>
+                    <div className="db-info-item">
+                      <span className="db-info-label">Price</span>
+                      <span className="db-info-value db-info-value--price">₹{booking.totalPrice || booking.amount || 0}</span>
                     </div>
                   </div>
 
-                  <div className="compact-route">
-                    <span className="route-text">{booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</span>
+                  <div className="db-route">
+                    <span className="db-route-text">{booking.origin || "N/A"} ➝ {booking.destination || "N/A"}</span>
                   </div>
 
-                  <div className="compact-dates">
-                    <span className="dates-text">{formatDateRange(booking.startDate, booking.endDate)}</span>
-                    <span className="trip-type">{booking.isRoundTrip ? "Round Trip" : "One Way"}</span>
+                  <div className="db-dates">
+                    <span className="db-dates-text">{formatDateRange(booking.startDate, booking.endDate)}</span>
+                    <span className="db-trip-type">{booking.isRoundTrip ? "Round Trip" : "One Way"}</span>
                   </div>
 
                   {canCancel(booking) && (
                     <button
-                      className="compact-cancel-button"
+                      className="db-cancel-btn"
                       onClick={() => showCancelModal(booking.bookingCode)}
                       disabled={manualCancelLoading}
                     >
@@ -482,10 +482,10 @@ function Dashboard() {
         )}
 
         {totalPages > 1 && (
-          <div className="pagination">
-            <button className="page-btn" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>⬅ Previous</button>
+          <div className="db-pagination">
+            <button className="db-page-btn" disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>⬅ Previous</button>
             <span>Page {page} of {totalPages}</span>
-            <button className="page-btn" disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next ➡</button>
+            <button className="db-page-btn" disabled={page >= totalPages} onClick={() => setPage((p) => Math.min(totalPages, p + 1))}>Next ➡</button>
           </div>
         )}
       </main>

@@ -6,8 +6,24 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: #000000;
-  color: #000000;
+  color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar Title Styling */
+.navbar h1 {
+  color: #000000;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar h1:hover {
+  color: #000000;
+  transform: scale(1.05);
 }
 
 .nav-left,
@@ -17,38 +33,73 @@
   gap: 1rem;
 }
 
-.nav-link {
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link-btn {
+  background: none;
+  border: none;
   color: #000000;
-  text-decoration: none;
-  font-weight: 800;
-  transition: color 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
 }
 
-.nav-link:hover {
-  color: #353333;
+.nav-link-btn:hover {
+  color: #000000;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.user-greeting {
+.register-link {
+  background-color: #4CAF50;
+  color: #ffffff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+}
+
+.register-link:hover {
+  background-color: #45a049;
+  color: #ffffff;
+}
+
+/* User Menu */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.user-menu span {
+  color: #000000;
   font-weight: 500;
-  color: rgb(255, 255, 255);
-  margin-right: 0.5rem;
 }
 
-.logout-button {
-  background-color: #000000;
+.logout-btn {
+  background-color: #f44336;
   color: #ffffff;
   border: none;
-  border-radius: 1px;
   padding: 0.4rem 0.8rem;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
-.logout-button:hover {
-  background-color: #ccc;
-  color: #111;
+.logout-btn:hover {
+  background-color: #da190b;
 }
+
+/* Logo Styling */
 .nav-logo {
   height: 50px;
   width: 50px;
@@ -60,13 +111,123 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.nav-logo:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
+
 
 .logo-link {
   display: flex;
   align-items: center;
   text-decoration: none;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #000000;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.mobile-nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 0.5rem;
+}
+
+.mobile-user-info span {
+  color: #000000;
+  font-weight: 500;
+}
+
+.mobile-logout-btn {
+  background-color: #f44336;
+  color: #ffffff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-logout-btn:hover {
+  background-color: #da190b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    height: auto; /* ✅ Allow flexible height */
+    padding: 0.8rem 1rem;
+    position: relative;
+    flex-wrap: wrap; /* ✅ Allow elements to wrap if needed */
+  }
+
+  .navbar h1 {
+    font-size: 1.4rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none; /* ✅ Keep hidden until toggled via JS */
+    flex-direction: column;
+  }
+
+  .nav-logo {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar h1 {
+    font-size: 1.2rem;
+  }
+
+  .nav-logo {
+    height: 35px;
+    width: 35px;
+  }
 }

@@ -8,7 +8,7 @@ import {
 import AuthContext from "../context/AuthContext";
 import ConfirmationModal from "./ConfirmationModal";
 import "./Navbar.css";
-
+import logo from "../assets/logo.png"
 function Navbar() {
   const { user, token, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ function Navbar() {
   const renderGuestNavigation = () => (
     <div className="nav-links">
 
-      <button onClick={() => handleScrollToSection("why-us")} className="nav-link-btn">Why Us</button>
+     
       <button onClick={() => handleScrollToSection("cities")} className="nav-link-btn">Cities</button>
       <button onClick={() => handleScrollToSection("reviews")} className="nav-link-btn">Reviews</button>
       <button onClick={() => handleScrollToSection("policies")} className="nav-link-btn">Policies</button>
@@ -62,8 +62,8 @@ function Navbar() {
       <button onClick={() => handleNavigation("/dashboard")} className="nav-link-btn">Dashboard</button>
       <button onClick={() => handleNavigation("/profile")} className="nav-link-btn">Profile</button>
       <div className="user-menu">
-        <User size={20} />
-        <span>Hello, {user?.name || "User"}</span>
+        <User size={70}  color="black"/>
+        <span>Hello,{user?.name || "User"}</span>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
     </div>
@@ -87,7 +87,7 @@ function Navbar() {
   const renderGuestMobileMenu = () => (
     <div className="mobile-menu">
      
-      <button onClick={() => handleScrollToSection("why-us")} className="mobile-nav-btn">Why Us</button>
+     
       <button onClick={() => handleScrollToSection("cities")} className="mobile-nav-btn">Cities</button>
       <button onClick={() => handleScrollToSection("reviews")} className="mobile-nav-btn">Reviews</button>
       <button onClick={() => handleScrollToSection("policies")} className="mobile-nav-btn">Policies</button>
@@ -123,8 +123,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+      < h1>RideInBls</h1>
      <img 
-        src="./src/assets/logo.png" 
+        src={logo} 
         alt="Blsride Logo" 
         className="nav-logo"
         onClick={() => navigate('/')}
@@ -144,7 +145,7 @@ function Navbar() {
         className="mobile-menu-btn"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
-        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        {mobileMenuOpen ? <X size={24} color="black" /> : <Menu size={24} color="black" />}
       </button>
 
       {/* Mobile Menu */}

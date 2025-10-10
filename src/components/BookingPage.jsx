@@ -13,13 +13,13 @@ export default function BookingPage() {
   const [suggestions, setSuggestions] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [activeField, setActiveField] = useState(null);
-  const [isLocationDetection, setIsLocationDetection] = useState(false); // Track location detection status
+  const [isLocationDetection, setIsLocationDetection] = useState(false);
 
   const navigate = useNavigate();
 
   const fetchCurrentLocation = async () => {
     setLoadingLocation(true);
-    setIsLocationDetection(true); // Start location detection
+    setIsLocationDetection(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
@@ -40,7 +40,7 @@ export default function BookingPage() {
             console.error("Reverse geocoding failed", err);
           }
           setLoadingLocation(false);
-          setIsLocationDetection(false); // End location detection
+          setIsLocationDetection(false);
         },
         async (err) => {
           console.warn("Geolocation failed, fallback to IP:", err);
@@ -53,12 +53,11 @@ export default function BookingPage() {
             console.error("IP location fetch failed", err);
           }
           setLoadingLocation(false);
-          setIsLocationDetection(false); // End location detection
+          setIsLocationDetection(false);
         },
         { enableHighAccuracy: true, timeout: 10000 }
       );
     } else {
-      // Browser doesn't support geolocation
       axios
         .get("/api/geo")
         .then((res) => {
@@ -69,7 +68,7 @@ export default function BookingPage() {
         .catch((err) => console.error("IP location fetch failed", err))
         .finally(() => {
           setLoadingLocation(false);
-          setIsLocationDetection(false); // End location detection
+          setIsLocationDetection(false);
         });
     }
   };
@@ -78,9 +77,8 @@ export default function BookingPage() {
     fetchCurrentLocation();
   }, []);
 
-  // Autocomplete suggestions
   const fetchSuggestions = async (query, type) => {
-    if (!query || isLocationDetection) { // Prevent fetching suggestions if location is being detected
+    if (!query || isLocationDetection) {
       setSuggestions([]);
       setShowModal(false);
       return;
@@ -102,10 +100,8 @@ export default function BookingPage() {
     try {
       const res = await axios.get(`${API_ENDPOINTS.GOOGLE.DETAILS}?place_id=${place.place_id}`);
       const formatted = res.data.result.formatted_address;
-
       if (activeField === "source") setSource(formatted);
       else setDestination(formatted);
-
       setSuggestions([]);
       setShowModal(false);
       setActiveField(null);
@@ -145,24 +141,16 @@ export default function BookingPage() {
           {loadingLocation ? (
             <span>Detecting your location...</span>
           ) : (
-            <span>Your Current Location is :{currentLocation || "Location unavailable"}</span>
+            <span>Your Current Location: {currentLocation || "Unavailable"}</span>
           )}
-        
+
           <button className="refresh-location-btn" onClick={fetchCurrentLocation} title="Refresh Location">
             <RefreshCw size={18} />
           </button>
         </div>
-        <p className="title">Go anywhere with</p>
-        <img src="./src/assets/location.png" alt="Book Ride" className="booking-image" />
-      </div>
 
-      {/* Right Side */}
-      <div className="booking-right">
-        <h1>RideInBls</h1>
-        <div className="booking-form">
-          <h2 className="booking-form-title">Book Your Ride</h2>
-
-          {/* Source */}
+        {/* Inputs moved below location */}
+        <div className="booking-form-inline">
           <div className="input-group">
             <MapPin size={30} className="icon" color="white" />
             <input
@@ -177,12 +165,10 @@ export default function BookingPage() {
             />
           </div>
 
-          {/* Swap Button */}
           <button type="button" className="swap-button" onClick={handleSwap} title="Swap Source & Destination">
             <Shuffle size={20} />
           </button>
 
-          {/* Destination */}
           <div className="input-group">
             <Navigation size={30} className="icon" color="white" />
             <input

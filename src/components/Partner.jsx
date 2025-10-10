@@ -1,6 +1,10 @@
 import React from "react";
 import "./Partner.css";
 
+// Import images
+import driverImage from "../assets/vu.png";
+import fleetImage from "../assets/partner.png";
+
 export default function BecomePartner() {
   return (
     <section className="partner-section">
@@ -23,7 +27,7 @@ export default function BecomePartner() {
           </button>
         </div>
         <div className="partner-image">
-          <img src="./src/assets/vu.png" alt="Drive with BlsRide" />
+          <img src={driverImage} alt="Drive with BlsRide" />
         </div>
       </div>
 
@@ -39,7 +43,7 @@ export default function BecomePartner() {
           </button>
         </div>
         <div className="partner-image">
-          <img src="./src/assets/partner.png" alt="Fleet Partnership" />
+          <img src={fleetImage} alt="Fleet Partnership" />
         </div>
       </div>
     </section>
