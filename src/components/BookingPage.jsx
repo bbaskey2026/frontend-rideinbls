@@ -77,24 +77,34 @@ export default function BookingPage() {
     fetchCurrentLocation();
   }, []);
 
-  const fetchSuggestions = async (query, type) => {
+  const debounceRef = useRef(null);
+
+  const fetchSuggestions = (query, type) => {
     if (!query || isLocationDetection) {
       setSuggestions([]);
       setShowModal(false);
       return;
     }
-    try {
-      const res = await axios.get(`${API_ENDPOINTS.GOOGLE.AUTOCOMPLETE}?input=${query}`);
-      const predictions = res.data.predictions || [];
-      setSuggestions(predictions);
-      setActiveField(type);
-      setShowModal(predictions.length > 0);
-    } catch (err) {
-      console.error("Autocomplete error:", err);
-      setSuggestions([]);
-      setShowModal(false);
+
+    if (debounceRef.current) {
+      clearTimeout(debounceRef.current);
     }
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await axios.get(`${API_ENDPOINTS.GOOGLE.AUTOCOMPLETE}?input=${encodeURIComponent(query.trim())}`);
+        const predictions = res.data.predictions || [];
+        setSuggestions(predictions);
+        setActiveField(type);
+        setShowModal(predictions.length > 0);
+      } catch (err) {
+        console.error("Autocomplete error:", err);
+        setSuggestions([]);
+        setShowModal(false);
+      }
+    }, 350);
   };
+
 
   const handleSelectPlace = async (place) => {
     try {
